@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: share-text
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    liquibase:
+      change-log: classpath:/db/changelog/changelog-main.xml
+server:
+  port: 9000
