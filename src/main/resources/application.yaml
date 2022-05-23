@@ -2,11 +2,26 @@ spring:
   application:
     name: share-text
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-    liquibase:
-      change-log: classpath:/db/changelog/changelog-main.xml
+    url: ${JDBC_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${JDBC_USER}
+    password: ${JDBC_PASS}
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-main.xml
 server:
-  port: 9000
+  port: ${APP_PORT}
+
+logging:
+  level:
+    org:
+      springframework: ${LOG_LEVEL}
+
+jwt:
+  secret: ${JWT_SECRET}
+
+text-sharing:
+  max-name-length: ${MAX_NAME_LENGTH}
+  max-title-length: ${MAX_TITLE_LENGTH}
+  max-body-length: ${MAX_BODY_LENGTH}
+  token-salt-length: ${TOKEN_SALT_LENGTH}
+  hashids-salt: ${HASHIDS_SALT}

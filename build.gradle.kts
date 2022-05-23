@@ -4,39 +4,50 @@ plugins {
     id("org.springframework.boot") version "2.6.7"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.6.21"
-    kotlin("plugin.spring") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.10"
+    kotlin("plugin.jpa") version "1.5.10"
+    kotlin("plugin.allopen") version "1.5.10"
 }
 
-group = "ru.spcfox"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+group = "ru.spcfox.sharetext"
+version = "0.1.0"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.liquibase:liquibase-core")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    developmentOnly("org.springdoc:springdoc-openapi-ui:1.6.7")
-    runtimeOnly("com.h2database:h2")
+    implementation(group = "org.springframework.boot", name = "spring-boot-starter")
+    implementation(group = "org.springframework.boot", name = "spring-boot-starter-web")
+    implementation(group = "org.springframework.boot", name = "spring-boot-starter-data-jpa")
+    implementation(group = "org.springdoc", name = "springdoc-openapi-ui", version = "1.6.+")
+    implementation(group = "org.jetbrains.kotlin", name = "kotlin-reflect")
+    implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8")
+    implementation(group = "org.liquibase", name = "liquibase-core")
+    implementation(group = "io.jsonwebtoken", name = "jjwt-api", version = "0.11.+")
+    implementation(group = "org.hashids", name = "hashids", version = "1.0.3")
+    implementation(group = "org.postgresql", name = "postgresql", version = "42.3.+")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
-    testImplementation("com.ninja-squad:springmockk:3.1.1")
-    testImplementation("io.mockk:mockk:1.12.3")
+    developmentOnly(group = "org.springframework.boot", name = "spring-boot-devtools")
+
+    runtimeOnly(group = "io.jsonwebtoken", name = "jjwt-impl", version = "0.11.+")
+    runtimeOnly(group = "io.jsonwebtoken", name = "jjwt-jackson", version = "0.11.+")
+
+    testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-api", version = "5.8.2")
+    testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-engine", version = "5.8.2")
+    testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-params", version = "5.8.2")
+    testImplementation(group = "org.springframework.boot", name = "spring-boot-starter-test")
+    testImplementation(group = "com.ninja-squad", name = "springmockk", version = "3.1.1")
+    testImplementation(group = "io.mockk", name = "mockk", version = "1.12.3")
+    testImplementation(group = "org.testcontainers", name = "postgresql", version = "1.17.2")
+    testImplementation(group = "org.testcontainers", name = "junit-jupiter", version = "1.17.2")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 

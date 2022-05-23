@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  share-text:
+    container_name: share-text
+    image: share-text:0.1.0
+    environment:
+      - LOG_LEVEL=${APP_LOG_LEVEL}
+      - JDBC_URL=${APP_JDBC_URL}/${DB_NAME}
+      - JDBC_USER=${DB_ADMIN_USER}
+      - JDBC_PASS=${DB_ADMIN_PASS}
+      - APP_PORT=${APP_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - MAX_NAME_LENGTH=${MAX_NAME_LENGTH}
+      - MAX_TITLE_LENGTH=${MAX_TITLE_LENGTH}
+      - MAX_BODY_LENGTH=${MAX_BODY_LENGTH}
+      - TOKEN_SALT_LENGTH=${TOKEN_SALT_LENGTH}
+      - HASHIDS_SALT=${HASHIDS_SALT}
+    depends_on:
+      - share-text-db
+    ports:
+      - "9000:8080"
+
+  share-text-db:
+    container_name: share-text-db
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_ADMIN_USER}
+      - POSTGRES_PASSWORD=${DB_ADMIN_PASS}
+    ports:
+      - "5433:5432"
