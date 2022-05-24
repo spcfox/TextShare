@@ -1,5 +1,6 @@
 package ru.spcfox.sharetext.sharetext.service
 
+import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import org.springframework.stereotype.Service
@@ -33,10 +34,10 @@ class JwtService(
             }
             return user
         } catch (e: Exception) {
-            if (e is InvalidTokenException) {
-                throw e
+            when (e) {
+                is JwtException, is NumberFormatException -> throw InvalidTokenException(e)
+                else -> throw e
             }
-            throw InvalidTokenException(e)
         }
     }
 }
