@@ -38,13 +38,7 @@ import java.util.stream.Stream
 @AutoConfigureMockMvc
 @KotlinParameterizedTest
 @TestPropertySource(properties = [
-    "APP_PORT=8080",
-    "LOG_LEVEL=INFO",
     "JWT_SECRET=your-secret-key-for-hs256-at-least-256-bits",
-    "MAX_NAME_LENGTH=24",
-    "MAX_TITLE_LENGTH=256",
-    "MAX_BODY_LENGTH=5000",
-    "TOKEN_SALT_LENGTH=24",
     "HASHIDS_SALT=salt-for-hash-ids",
 ])
 class ShareTextApplicationIntegrationTests {
