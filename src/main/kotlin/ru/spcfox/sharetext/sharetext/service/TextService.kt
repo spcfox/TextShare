@@ -80,7 +80,7 @@ class TextService(
     private fun String.prepareTitle(): String = when {
         isBlank() ->
             throw InvalidTextException("Title is empty.")
-        length > textSharingProperties.maxNameLength ->
+        length > textSharingProperties.maxTitleLength ->
             throw InvalidTextException("The title is too long. Maximum ${textSharingProperties.maxTitleLength} characters.")
         else -> trim()
     }
@@ -88,7 +88,7 @@ class TextService(
     private fun String.prepareBody(): String = when {
         isBlank() ->
             throw InvalidTextException("Body is empty.")
-        length > textSharingProperties.maxNameLength ->
+        length > textSharingProperties.maxBodyLength ->
             throw InvalidTextException("The body is too long. Maximum ${textSharingProperties.maxBodyLength} characters.")
         else -> trim()
     }

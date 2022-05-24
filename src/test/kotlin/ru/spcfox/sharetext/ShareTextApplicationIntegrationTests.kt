@@ -225,7 +225,7 @@ class ShareTextApplicationIntegrationTests {
             { assertEquals(body, text.body) },
             { assertEquals(name, text.author) },
             { assertFalse(text.canEdit) },
-            { assertTrue(text.editedAt == text.createdAt) }
+            { assertEquals(text.editedAt, text.createdAt) }
         )
     }
 
@@ -247,7 +247,7 @@ class ShareTextApplicationIntegrationTests {
             { assertEquals(name, text.author) },
             { assertTrue(text.canEdit) },
             { assertEquals(exposure ?: TextExposure.PUBLIC, text.exposure) },
-            { assertTrue(text.editedAt == text.createdAt) }
+            { assertEquals(text.editedAt, text.createdAt) }
         )
     }
 
@@ -694,12 +694,12 @@ class ShareTextApplicationIntegrationTests {
 
     private fun invalidNames() = listOf(
         Arguments.of("  \t  \n\r    "),
-        Arguments.of(('a'..'z').toString().repeat(100))
+        Arguments.of('a'.toString().repeat(500))
     )
 
     private fun invalidBodies() = listOf(
         Arguments.of("  \t  \n\r    "),
-        Arguments.of(('a'..'z').toString().repeat(1000))
+        Arguments.of(('a'..'z').toString().repeat(10000))
     )
 
     private fun exposures() = listOf(
